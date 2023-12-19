@@ -4,6 +4,11 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+
+	"github.com/krishnaduttPanchagnula/Tfblueprintgen/lambda"
+	"github.com/krishnaduttPanchagnula/Tfblueprintgen/readme"
+	"github.com/krishnaduttPanchagnula/Tfblueprintgen/s3"
+	"github.com/krishnaduttPanchagnula/Tfblueprintgen/vpc"
 )
 
 func main() {
@@ -15,6 +20,11 @@ func main() {
 		filepath.Join("terraform-aws", "modules", "lambda", "main.tf"),
 		filepath.Join("terraform-aws", "modules", "lambda", "variables.tf"),
 		filepath.Join("terraform-aws", "modules", "lambda", "outputs.tf"),
+		filepath.Join("terraform-aws", "modules", "lambda"),
+		filepath.Join("terraform-aws", "modules", "s3"),
+		filepath.Join("terraform-aws", "modules", "s3", "main.tf"),
+		filepath.Join("terraform-aws", "modules", "s3", "variables.tf"),
+		filepath.Join("terraform-aws", "modules", "s3", "outputs.tf"),
 		filepath.Join("terraform-aws", "modules", "vpc"),
 		filepath.Join("terraform-aws", "modules", "vpc", "main.tf"),
 		filepath.Join("terraform-aws", "modules", "vpc", "variables.tf"),
@@ -43,14 +53,49 @@ func main() {
 		switch {
 		case filepath.Ext(path) == ".tf" && path == filepath.Join("terraform-aws", "modules", "lambda", "variables.tf"):
 			// Create variables.tf file with dynamic content for lambda module
-			err := createLambdaVariablesFile(path)
+			err := lambda.CreateLambdaVariablesFile(path)
+			if err != nil {
+				fmt.Printf("Error creating %s: %v\n", path, err)
+				os.Exit(1)
+			}
+		case filepath.Ext(path) == ".tf" && path == filepath.Join("terraform-aws", "modules", "lambda", "main.tf"):
+			// Create variables.tf file with dynamic content for lambda module
+			err := lambda.CreateLambdamoduleFile(path)
 			if err != nil {
 				fmt.Printf("Error creating %s: %v\n", path, err)
 				os.Exit(1)
 			}
 		case filepath.Ext(path) == ".tf" && path == filepath.Join("terraform-aws", "modules", "vpc", "variables.tf"):
 			// Create variables.tf file with dynamic content for vpc module
-			err := vpc.createVPCVariablesFile(path)
+			err := vpc.CreateVPCVariablesFile(path)
+			if err != nil {
+				fmt.Printf("Error creating %s: %v\n", path, err)
+				os.Exit(1)
+			}
+		case filepath.Ext(path) == ".tf" && path == filepath.Join("terraform-aws", "modules", "vpc", "main.tf"):
+			// Create variables.tf file with dynamic content for vpc module
+			err := vpc.CreateVPCModuleFile(path)
+			if err != nil {
+				fmt.Printf("Error creating %s: %v\n", path, err)
+				os.Exit(1)
+			}
+		case filepath.Ext(path) == ".tf" && path == filepath.Join("terraform-aws", "modules", "s3", "variables.tf"):
+			// Create variables.tf file with dynamic content for lambda module
+			err := s3.CreateS3VariablesFile(path)
+			if err != nil {
+				fmt.Printf("Error creating %s: %v\n", path, err)
+				os.Exit(1)
+			}
+		case filepath.Ext(path) == ".tf" && path == filepath.Join("terraform-aws", "modules", "s3", "main.tf"):
+			// Create variables.tf file with dynamic content for lambda module
+			err := s3.CreateS3MainFile(path)
+			if err != nil {
+				fmt.Printf("Error creating %s: %v\n", path, err)
+				os.Exit(1)
+			}
+		case filepath.Ext(path) == ".md" && path == filepath.Join("terraform-aws", "README.md"):
+			// Create variables.tf file with dynamic content for lambda module
+			err := readme.CreateReadmeFile(path)
 			if err != nil {
 				fmt.Printf("Error creating %s: %v\n", path, err)
 				os.Exit(1)
@@ -76,37 +121,4 @@ func main() {
 	}
 
 	fmt.Println("File structure for terraform-aws created successfully.")
-}
-
-func createLambdaVariablesFile(filePath string) error {
-	content := `variable "function_name" {
-  description = "Name of the Lambda function"
-  type        = string
-}
-
-variable "description" {
-  description = "Description of the Lambda function"
-  type        = string
-}
-
-variable "runtime" {
-  description = "Runtime for the Lambda function"
-  type        = string
-}
-
-variable "handler" {
-  description = "Handler for the Lambda function"
-  type        = string
-}
-
-variable "iam_role_name" {
-  description = "Name of the IAM role for Lambda execution"
-  type        = string
-}
-
-variable "environment" {
-  description = "Environment tag for Lambda resources"
-  type        = string
-}`
-	return os.WriteFile(filePath, []byte(content), os.ModePerm)
 }
