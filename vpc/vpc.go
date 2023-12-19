@@ -2,7 +2,7 @@ package vpc
 
 import "os"
 
-func createVPCVariablesFile(filePath string) error {
+func CreateVPCVariablesFile(filePath string) error {
 	content := `variable "vpc_name" {
   description = "Name of the VPC"
   type        = string
@@ -45,7 +45,7 @@ variable "tags" {
 	return os.WriteFile(filePath, []byte(content), os.ModePerm)
 }
 
-func createVPCModuleFile(filePath string) error {
+func CreateVPCModuleFile(filePath string) error {
 	content := `
 	module "vpc" {
 	  source = "terraform-aws-modules/vpc/aws"
