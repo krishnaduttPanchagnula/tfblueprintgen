@@ -1,6 +1,17 @@
 package vpc
 
-import "os"
+import (
+	"os"
+	"path/filepath"
+)
+
+func CreateVpcFilePathNames(basepath string) []string {
+	return []string{filepath.Join(basepath, "modules", "vpc"),
+		filepath.Join(basepath, "modules", "vpc", "main.tf"),
+		filepath.Join(basepath, "modules", "vpc", "variables.tf"),
+		filepath.Join(basepath, "modules", "vpc", "outputs.tf"),
+	}
+}
 
 func CreateVPCVariablesFile(filePath string) error {
 	content := `variable "vpc_name" {
@@ -45,6 +56,8 @@ variable "tags" {
 	return os.WriteFile(filePath, []byte(content), os.ModePerm)
 }
 
+// CreateVPCModuleFile writes a Terraform module configuration for VPC to the
+// provided file path. It populates the module configuration with variables.
 func CreateVPCModuleFile(filePath string) error {
 	content := `
 	module "vpc" {

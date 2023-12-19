@@ -1,6 +1,17 @@
 package s3
 
-import "os"
+import (
+	"os"
+	"path/filepath"
+)
+
+func CreateS3FilePathNames(basepath string) []string {
+	return []string{filepath.Join(basepath, "modules", "s3"),
+		filepath.Join(basepath, "modules", "s3", "main.tf"),
+		filepath.Join(basepath, "modules", "s3", "variables.tf"),
+		filepath.Join(basepath, "modules", "s3", "outputs.tf"),
+	}
+}
 
 func CreateS3MainFile(filePath string) error {
 	content := `resource "aws_s3_bucket" "products" {

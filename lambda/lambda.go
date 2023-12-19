@@ -1,6 +1,19 @@
 package lambda
 
-import "os"
+import (
+	"os"
+	"path/filepath"
+)
+
+func CreateLambdaFilePathNames(basepath string) []string {
+	return []string{
+		filepath.Join(basepath, "modules", "lambda"),
+		filepath.Join(basepath, "modules", "lambda", "main.tf"),
+		filepath.Join(basepath, "modules", "lambda", "variables.tf"),
+		filepath.Join(basepath, "modules", "lambda", "outputs.tf"),
+		filepath.Join(basepath, "modules", "lambda"),
+	}
+}
 
 func CreateLambdaVariablesFile(filePath string) error {
 	content := `variable "function_name" {
