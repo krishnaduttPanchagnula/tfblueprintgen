@@ -61,7 +61,9 @@ func CreateVPCModuleFile(filePath string) error {
 	  enable_vpn_gateway = var.enable_vpn_gateway
 	
 	  tags = var.tags
-	  }
+	  
+
+	  
 	}`
 	return os.WriteFile(filePath, []byte(content), os.ModePerm)
 }
