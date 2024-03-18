@@ -9,3 +9,22 @@ Once selected, the tfblueprintgen will generate all the required files and modul
 
 
 <video controls src="assets/Tfblueprintgen_charmCLI-ezgif.com-video-to-mp4-converter.mp4" title="tfblueprintgen usage"></video>
+
+## Installation
+
+- From source:
+Run the following setps to build your own binary
+
+```shell
+git clone https://github.com/krishnaduttPanchagnula/tfblueprintgen.git
+cd tfblueprintgen
+go build -o tfblueprintgen main.go
+```
+- Downloading Binary in Linux
+
+```bash
+wget https://github.com/krishnaduttPanchagnula/tfblueprintgen/releases/download/0.2/tfblueprintgen
+
+chmod 777 tfblueprintgen
+
+```
