@@ -1,20 +1,20 @@
 module github.com/krishnaduttPanchagnula/Tfblueprintgen
 
 go 1.21.5
-module github.com/krishnaduttPanchagnula/Tfblueprintgen
 
-go 1.21.5
+require (
+	github.com/charmbracelet/bubbles v0.18.0
+	github.com/charmbracelet/bubbletea v0.25.0
+	github.com/charmbracelet/huh v0.3.0
+	github.com/charmbracelet/lipgloss v0.10.0
+	github.com/charmbracelet/x/exp/strings v0.0.0-20240315032850-7166446a746e
+)
 
 require (
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/catppuccin/go v0.2.0 // indirect
-	github.com/charmbracelet/bubbles v0.18.0 // indirect
-	github.com/charmbracelet/bubbletea v0.25.0 // indirect
-	github.com/charmbracelet/huh v0.3.0 // indirect
-	github.com/charmbracelet/huh/spinner v0.0.0-20240306161957-71f31c155b08 // indirect
-	github.com/charmbracelet/lipgloss v0.10.0 // indirect
-	github.com/charmbracelet/x/exp/strings v0.0.0-20240315032850-7166446a746e // indirect
+	github.com/charmbracelet/harmonica v0.2.0 // indirect
 	github.com/containerd/console v1.0.4-0.20230313162750-1ae8d489ac81 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
