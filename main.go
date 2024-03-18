@@ -6,15 +6,16 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"time"
 
+	"github.com/charmbracelet/bubbles/progress"
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/huh"
-	"github.com/charmbracelet/huh/spinner"
 	"github.com/charmbracelet/lipgloss"
 	xstrings "github.com/charmbracelet/x/exp/strings"
 	"github.com/krishnaduttPanchagnula/Tfblueprintgen/lambda"
 	"github.com/krishnaduttPanchagnula/Tfblueprintgen/readme"
 	"github.com/krishnaduttPanchagnula/Tfblueprintgen/s3"
+	progressbar "github.com/krishnaduttPanchagnula/Tfblueprintgen/utilis"
 	"github.com/krishnaduttPanchagnula/Tfblueprintgen/vpc"
 )
 
@@ -212,11 +213,14 @@ func main() {
 
 	// fmt.Printf("File structure for %s created successfully.", BASE_FOLDER_NAME)
 
-	prepareBurger := func() {
-		time.Sleep(2 * time.Second)
+	m := progressbar.Model{
+		Progress: progress.New(progress.WithDefaultGradient()),
 	}
 
-	_ = spinner.New().Title("Preparing your Terraform Blueprint...").Action(prepareBurger).Run()
+	if _, err := tea.NewProgram(m).Run(); err != nil {
+		fmt.Println("Oh no!", err)
+		os.Exit(1)
+	}
 
 	// Print order summary.
 	{
