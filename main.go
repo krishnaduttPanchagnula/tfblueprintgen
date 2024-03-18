@@ -15,7 +15,7 @@ import (
 	"github.com/krishnaduttPanchagnula/Tfblueprintgen/lambda"
 	"github.com/krishnaduttPanchagnula/Tfblueprintgen/readme"
 	"github.com/krishnaduttPanchagnula/Tfblueprintgen/s3"
-	progressbar "github.com/krishnaduttPanchagnula/Tfblueprintgen/utilis"
+	progressbar "github.com/krishnaduttPanchagnula/Tfblueprintgen/utils"
 	"github.com/krishnaduttPanchagnula/Tfblueprintgen/vpc"
 )
 
@@ -71,7 +71,7 @@ func main() {
 		// We'll need to know what topping to add too.
 		huh.NewGroup(
 			huh.NewMultiSelect[string]().
-				Title("Choose List of ENV ").
+				Title("Choose List of Environments ").
 				Description("Select the list of environments used in your organization .").
 				Options(
 					huh.NewOption("Production", "production"),
@@ -88,12 +88,12 @@ func main() {
 				Value(&Package.Environments),
 
 			huh.NewMultiSelect[string]().
-				Title("Toppings").
-				Description("Choose up to 4.").
+				Title("Resources").
+				Description("Choose all the resources that you want modules for.").
 				Options(
 					huh.NewOption("RDS", "rds"),
 					huh.NewOption("VPC", "vpc").Selected(true),
-					huh.NewOption("lambda", "lambda"),
+					huh.NewOption("Lambda", "lambda"),
 				).
 				Validate(func(t []string) error {
 					if len(t) <= 0 {
