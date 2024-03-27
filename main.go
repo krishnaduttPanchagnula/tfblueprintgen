@@ -58,9 +58,26 @@ type Package struct {
 	Resources    []string
 }
 
+var (
+    version = "0.3" 
+    showVersion bool
+)
+
+func init() {
+    flag.BoolVar(&showVersion, "version", false, "Print version information")
+    flag.BoolVar(&showVersion, "v", false, "Print version information (shorthand)")
+}
+
 func main() {
 
 	var Package Package
+
+	flag.Parse()
+
+    if showVersion {
+        fmt.Printf(version)
+        return
+    }
 
 	form := huh.NewForm(
 		huh.NewGroup(huh.NewNote().
