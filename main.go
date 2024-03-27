@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -74,10 +75,10 @@ func main() {
 
 	flag.Parse()
 
-    if showVersion {
-        fmt.Printf(version)
-        return
-    }
+	if showVersion {
+		fmt.Printf("Tfblueprintgen version: %s\n", version)
+		return
+	}
 
 	form := huh.NewForm(
 		huh.NewGroup(huh.NewNote().
