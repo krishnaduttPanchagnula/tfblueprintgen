@@ -1,5 +1,5 @@
 # tfblueprintgen
-This is a cli utility developed using charmbracelet CLI assets,  which generates the Modular file structure with the code for your Terraform code to speed up the development.
+Tfblueprintgen is an open-source command-line tool developed using the Charmbracelet CLI assets. It generates a modular file structure with code for your Terraform projects, speeding up the development process. By automating the creation of boilerplate files and directory structures, Tfblueprintgen streamlines setting new Terraform projects.
 
 In this you can 
 - select the environments that would be present in you organization and
